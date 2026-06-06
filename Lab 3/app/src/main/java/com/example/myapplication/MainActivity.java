@@ -31,27 +31,28 @@ public class MainActivity extends AppCompatActivity {
 
     private int imageID;
     private Intent data;
-    public void setLogo(View view){
+
+    public void setLogo(View view) {
         Intent intent = new Intent(this, LogoSelectActivity.class);
         logoLauncher.launch(intent);
     }
 
-    public void openInGoogleMaps (View view) {
+    public void openInGoogleMaps(View view) {
         EditText teamPostalCode = (EditText) findViewById(R.id.postalCode);
-        Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps?q=" +teamPostalCode.getText());
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps?q=" + teamPostalCode.getText());
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
     }
 
-    public void submit (View view) {
+    public void submit(View view) {
         EditText teamNameView = (EditText) findViewById(R.id.teamName);
         EditText postalCodeView = (EditText) findViewById(R.id.postalCode);
         String teamName = teamNameView.getText().toString();
         String postalCode = postalCodeView.getText().toString();
         Team team = new Team(teamName, postalCode, drawableName);
         Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class);
-        intent.putExtra("teamInfo", String.valueOf(team));
+        intent.putExtra("teamInfo", team);
         startActivity(intent);
     }
 
@@ -68,35 +69,30 @@ public class MainActivity extends AppCompatActivity {
 
         logoImage = findViewById(R.id.logoImage);
         logoLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),(
-                        result -> {
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        ImageView logoImage = (ImageView) findViewById(R.id.logoImage);
+                        imageID = result.getData().getIntExtra("imageID", R.id.teamid00);
 
-            ImageView logoImage = (ImageView) findViewById(R.id.logoImage);
+                        if (imageID == R.id.teamid00) {
+                            drawableName = "ic_logo_00";
+                        } else if (imageID == R.id.teamid01) {
+                            drawableName = "ic_logo_01";
+                        } else if (imageID == R.id.teamid02) {
+                            drawableName = "ic_logo_02";
+                        } else if (imageID == R.id.teamid03) {
+                            drawableName = "ic_logo_03";
+                        } else if (imageID == R.id.teamid04) {
+                            drawableName = "ic_logo_04";
+                        } else if (imageID == R.id.teamid05) {
+                            drawableName = "ic_logo_05";
+                        } else {
+                            drawableName = "ic_logo_00";
+                        }
 
-            drawableName = "ic_logo_00";
-
-            imageID = data.getIntExtra("imageID", R.id.teamid00);
-
-
-            if (imageID == R.id.teamid00) {
-                drawableName = "ic_logo_00";
-            } else if (imageID == R.id.teamid01) {
-                drawableName = "ic_logo_01";
-            } else if (imageID == R.id.teamid02) {
-                drawableName = "ic_logo_02";
-            } else if (imageID == R.id.teamid03) {
-                drawableName = "ic_logo_03";
-            } else if (imageID == R.id.teamid04) {
-                drawableName = "ic_logo_04";
-            } else if (imageID == R.id.teamid05) {
-                drawableName = "ic_logo_05";
-            } else {
-                drawableName = "ic_logo_00";
-            }
-
-            resID = getResources().getIdentifier(drawableName, "drawable", getPackageName());
-            logoImage.setImageResource(resID);
-        }));
-
+                        resID = getResources().getIdentifier(drawableName, "drawable", getPackageName());
+                        logoImage.setImageResource(resID);
+                    }
+                });
     }
 }
