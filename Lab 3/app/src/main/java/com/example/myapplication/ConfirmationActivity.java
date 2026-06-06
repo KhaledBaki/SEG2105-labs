@@ -1,6 +1,10 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +17,20 @@ public class ConfirmationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_confirmation);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        Intent intent = getIntent();
+        Team team = (Team) getIntent().getSerializableExtra("teamInfo");
+
+        TextView teamName = (TextView) findViewById(R.id.teamNameTextViewId);
+        teamName.setText(team.getName());
+
+        TextView teamPostalCode = (TextView) findViewById(R.id.postalCodeTextViewId);
+        teamPostalCode.setText(team.getPostalCode());
+
+        ImageView logoImage = (ImageView) findViewById(R.id.teamLogoId);
+
+        @SuppressLint("DiscouragedApi") int resID = getResources().getIdentifier(team.getDrawableName(), "drawable", getPackageName());
+        logoImage.setImageResource(resID);
     }
 }
