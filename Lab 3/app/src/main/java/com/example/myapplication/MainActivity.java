@@ -24,8 +24,13 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView logoImage;
+
+    private int resID;
     private String drawableName;
     private ActivityResultLauncher<Intent> logoLauncher;
+
+    private int imageID;
+    private Intent data;
     public void setLogo(View view){
         Intent intent = new Intent(this, LogoSelectActivity.class);
         logoLauncher.launch(intent);
@@ -33,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openInGoogleMaps (View view) {
         EditText teamPostalCode = (EditText) findViewById(R.id.postalCode);
-        Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps? q="
-                +teamPostalCode.getText());
+        Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps?q=" +teamPostalCode.getText());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
@@ -63,14 +67,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         logoImage = findViewById(R.id.logoImage);
-        logoLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),(result -> {
+        logoLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),(
+                        result -> {
 
             ImageView logoImage = (ImageView) findViewById(R.id.logoImage);
 
             drawableName = "ic_logo_00";
 
-            Intent data = result.getData();
-            int imageID = data.getIntExtra("imageID", R.id.teamid00);
+            imageID = data.getIntExtra("imageID", R.id.teamid00);
 
 
             if (imageID == R.id.teamid00) {
@@ -88,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 drawableName = "ic_logo_00";
             }
-            int resID = getResources().getIdentifier(drawableName, "drawable",
-                    getPackageName());
+
+            resID = getResources().getIdentifier(drawableName, "drawable", getPackageName());
             logoImage.setImageResource(resID);
         }));
 
