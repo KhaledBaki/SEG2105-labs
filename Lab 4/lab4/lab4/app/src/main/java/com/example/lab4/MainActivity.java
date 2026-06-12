@@ -44,17 +44,57 @@ public class MainActivity extends AppCompatActivity {
 
         super.onStart();
         // Attatching value event listener
-        databaseProducts.addValueEventListener(new ValueEventListener()){
+        databaseProducts.addValueEventListener(new ValueEventListener()) {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot){
-                //TODO
+            public void onDataChange (DataSnapshot dataSnapshot){
+                // Clearing the previous artist list
+                products.clear();
+
+                //iterating through all the nodes
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //getting product
+                    Product product = postSnapshot.getValue(Product.class);
+                    //adding product to the list
+                    products.add(product);
+                }
+
+                //creating adapter
+                ProductList productsAdapter = new ProductList(MainActivity.this, products);
+                //attaching adapter to the listview
+                listViewProducts.setAdapter(productsAdapter);
+
+                //attaching value event listener
+                databaseProducts.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        //clearing the previous artist list
+                        products.clear();
+
+                        //iterating through all the nodes
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            //getting product
+                            Product product = postSnapshot.getValue(Product.class);
+                            //adding product to the list
+                            products.add(product);
+                        }
+                        //creating adapter
+                        ProductList productsAdapter = new ProductList(MainActivity.this, products);
+                        //attaching adapter to the listview
+                        listViewProducts.setAdapter(productsAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
             @Override
-            public void onCancelled(DatabaseError databaseError){
+            public void onCancelled (DatabaseError databaseError){
 
             }
         }
     }
-
-
 }
