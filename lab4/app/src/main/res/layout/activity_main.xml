@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context="com.example.lab4.MainActivity">
+    tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter product name" />
+        android:hint="Enter product name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editTextPrice"
@@ -21,21 +22,43 @@
         android:hint="Enter product price"
         android:inputType="numberDecimal" />
 
-    <Button
-        android:id="@+id/buttonAddProduct"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextPrice"
-        android:layout_marginTop="8dp"
-        android:text="Add Product" />
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonAddProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/buttonUpdateProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Update" />
+
+        <Button
+            android:id="@+id/buttonDeleteProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Delete" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textViewProducts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonAddProduct"
+        android:layout_below="@id/buttonLayout"
         android:layout_marginTop="16dp"
-        android:text="Products"
+        android:text="Product List"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <ListView

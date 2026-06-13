@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    // My instance variables
     DatabaseReference databaseProducts;
     EditText editTextName;
     EditText editTextPrice;
@@ -40,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     List<Product> products;
 
-    Button buttonAddProduct;
+    Button buttonAddProduct, buttonUpdateProduct, buttonDeleteProduct;
+    String selectedProductId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +54,42 @@ public class MainActivity extends AppCompatActivity {
         editTextPrice = findViewById(R.id.editTextPrice);
         listViewProducts = findViewById(R.id.listViewProducts);
         buttonAddProduct = findViewById(R.id.buttonAddProduct);
+        buttonUpdateProduct = findViewById(R.id.buttonUpdateProduct);
+        buttonDeleteProduct = findViewById(R.id.buttonDeleteProduct);
         products = new ArrayList<>();
         databaseProducts = FirebaseDatabase.getInstance().getReference("products");
 
-        buttonAddProduct = findViewById(R.id.buttonAddProduct);
+
+        listViewProducts.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+            Product product = products.get(position);
+            selectedProductId = product.getId();
+            editTextName.setText(product.getName());
+            editTextPrice.setText(String.valueOf(product.getPrice()));
+        });
 
         buttonAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addProduct();
+            }
+        });
+
+        buttonAddProduct.setOnClickListener(v -> addProduct());
+
+        buttonUpdateProduct.setOnClickListener(v -> {
+            if (selectedProductId != null) {
+                String name = editTextName.getText().toString().trim();
+                double price = Double.parseDouble(editTextPrice.getText().toString().trim());
+                updateProduct(selectedProductId, name, price);
+            }
+        });
+
+        buttonDeleteProduct.setOnClickListener(v -> {
+            if (selectedProductId != null) {
+                deleteProduct(selectedProductId);
+                selectedProductId = null;
+                editTextName.setText("");
+                editTextPrice.setText("");
             }
         });
     }
