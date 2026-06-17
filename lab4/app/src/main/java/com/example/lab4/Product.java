@@ -1,22 +1,31 @@
-package com.example.lab4; // Keep whatever your package name is here!
+// Importing Lab 4
+package com.example.lab4;
 
 public class Product {
+
+    // instance variables
     private String id;
     private String name;
     private double price;
 
-    // Default constructor is required for Firebase to work!
+    // Must have non-parameterized constructor for firebase to work
+    // Java would have implemented this automatically however
     public Product() {
     }
 
-    // Constructor with parameters
+    /**
+     * Parameterized constructor of Product
+     *
+     * @param id Identification of specific product
+     * @param name Name of product
+     * @param price Price of product
+     */
     public Product(String id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    // Getters
     public String getId() {
         return id;
     }
