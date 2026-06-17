@@ -30,7 +30,7 @@ public class ProductList extends ArrayAdapter<Product> {
         LayoutInflater inflater = context.getLayoutInflater();
 
         // This inflates a basic built-in Android layout that just has a TextView
-        View listViewItem = inflater.inflate(android.R.layout.simple_list_item_1, null, true);
+        View listViewItem = inflater.inflate(android.R.layout.simple_list_item_1, null, false);
 
         // Get the TextView from the built-in layout
         TextView textViewName = listViewItem.findViewById(android.R.id.text1);

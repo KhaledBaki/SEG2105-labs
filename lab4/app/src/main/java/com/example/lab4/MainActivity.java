@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
                     //getting product
                     Product product = postSnapshot.getValue(Product.class);
                     //adding product to the list
-                    products.add(product);
+                    if(product != null)
+                        products.add(product);
                 }
                 //creating adapter
                 ProductList productsAdapter = new ProductList(MainActivity.this, products);
