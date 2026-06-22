@@ -4,8 +4,15 @@ public class Product {
     private String name;
     private int SKU;
 
+    public Product(){
+        // Empty constructor
+    }
+
+    public Product(String name, int SKU){
+
+    }
     /**
-     * Product Constructor
+     * Product Parameterized Constructor
      *
      * @param productID identification of product
      * @param name of product
