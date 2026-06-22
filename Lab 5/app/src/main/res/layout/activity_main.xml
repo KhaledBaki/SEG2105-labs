@@ -94,6 +94,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            app:cornerRadius="0dp"
+            android:layout_margin="10dp"
             android:text="ADD"
             android:backgroundTint="#32CD32"/>
 
@@ -102,6 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            app:cornerRadius="0dp"
+            android:layout_margin="10dp"
             android:text="FIND"
             android:backgroundTint="#3232CD"/>
 
@@ -112,6 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="DELETE"
+            app:cornerRadius="0dp"
+            android:layout_margin="10dp"
             android:backgroundTint="#CD3232"/>
     </LinearLayout>
 
