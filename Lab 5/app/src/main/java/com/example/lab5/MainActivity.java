@@ -91,15 +91,15 @@ public class MainActivity extends AppCompatActivity {
 
         MyDBHandler dbHandler = new MyDBHandler(this);
         Product product = dbHandler.findProduct(productBox.getText().toString());
-        boolean result = false;
+        boolean result = dbHandler.deleteProduct(productBox.getText().toString());
 
         if (result) {
             idView.setText("Record Deleted");
             productBox.setText("");
             skuBox.setText("");
-        }
-        else
+        } else {
             idView.setText("No Match Found");
+        }
     }
 
 

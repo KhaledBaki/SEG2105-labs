@@ -9,7 +9,8 @@ public class Product {
     }
 
     public Product(String name, int SKU){
-
+        this.name = name;
+        this.SKU = SKU;
     }
     /**
      * Product Parameterized Constructor

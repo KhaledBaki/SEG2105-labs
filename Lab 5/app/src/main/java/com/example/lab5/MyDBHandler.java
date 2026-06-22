@@ -44,7 +44,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         // Creating a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PRODUCTNAME, product.getProductID());
+        values.put(COLUMN_PRODUCTNAME, product.getName());
         values.put(COLUMN_SKU, product.getSKU());
 
         // Inserting values into the database
