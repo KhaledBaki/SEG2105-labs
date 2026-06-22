@@ -94,31 +94,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:cornerRadius="0dp"
             android:layout_margin="10dp"
             android:text="ADD"
-            android:backgroundTint="#32CD32"/>
+            android:onClick="newProduct"
+            android:backgroundTint="#32CD32"
+            app:cornerRadius="0dp" />
 
         <Button
             android:id="@+id/buttonFind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:cornerRadius="0dp"
             android:layout_margin="10dp"
             android:text="FIND"
-            android:backgroundTint="#3232CD"/>
-
+            android:onClick="lookupProduct"
+            android:backgroundTint="#3232CD"
+            app:cornerRadius="0dp" />
 
         <Button
             android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="DELETE"
-            app:cornerRadius="0dp"
             android:layout_margin="10dp"
-            android:backgroundTint="#CD3232"/>
+            android:text="DELETE"
+            android:onClick="removeProduct"
+            android:backgroundTint="#CD3232"
+            app:cornerRadius="0dp" />
     </LinearLayout>
 
 </RelativeLayout>

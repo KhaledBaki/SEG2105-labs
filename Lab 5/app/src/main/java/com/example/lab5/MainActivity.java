@@ -38,18 +38,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void newProduct (View view) {
+    public void newProduct(View view) {
+        String name = productBox.getText().toString().trim();
+        String skuText = skuBox.getText().toString().trim();
 
-        int sku = Integer.parseInt(skuBox.getText().toString());
+        if (name.isEmpty()) {
+            idView.setText("Enter a product name");
+            return;
+        }
 
-        Product product = new Product(productBox.getText().toString(), sku);
+        if (skuText.isEmpty()) {
+            idView.setText("Enter a SKU");
+            return;
+        }
+
+        int sku;
+        try {
+            sku = Integer.parseInt(skuText);
+        } catch (NumberFormatException e) {
+            idView.setText("SKU must be a number");
+            return;
+        }
+
+        Product product = new Product(name, sku);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
         dbHandler.addProduct(product);
 
         productBox.setText("");
-
         skuBox.setText("");
+        idView.setText("Product Added");
     }
 
 
