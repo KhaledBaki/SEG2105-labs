@@ -6,6 +6,8 @@
 - Lab 3
 - Lab 4
 - Lab 5
+- Lab 6
+- Lab 7
 
 ## Lab Goals
 - Use Android Studio to build Android Apps
@@ -16,3 +18,5 @@
 - Multiple Layouts
 - Remote Database connection
 - Local Database using SQLite
+- Implementing test cases for android apps
+- Continous Integration Implementation via GitHub
